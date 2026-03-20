@@ -42,37 +42,37 @@ while True:
 			print("state none")
 				
 			if keyboard.is_pressed('1'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "1"
 			if keyboard.is_pressed('2'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "2"
 			if keyboard.is_pressed('3'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "3"
 			if keyboard.is_pressed('4'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "4"
 			if keyboard.is_pressed('5'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "5"
 			if keyboard.is_pressed('6'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "6"
 			if keyboard.is_pressed('7'):
-				time.sleep(0.5)
+				time.sleep(0.2)
 				current_number = current_number + "7"
 			if keyboard.is_pressed('8'):
-				time.sleep(1)
+				time.sleep(0.2)
 				current_number = current_number + "8"
 			if keyboard.is_pressed('9'):
-				time.sleep(1)
+				time.sleep(0.2)
 				current_number = current_number + "9"
 			if keyboard.is_pressed('0'):
-				time.sleep(1)
+				time.sleep(0.2)
 				current_number = current_number + "0"
 				
-			if keyboard.is_pressed('p'):
+			if keyboard.is_pressed('enter'):
 				subprocess.run(["/usr/share/ofono/scripts/dial-number", current_number])
 				current_number = ""
 				
@@ -85,19 +85,15 @@ while True:
 		
 		if (state == "incoming"):
 			print("state incoming")
-			if keyboard.is_pressed('a'):
+			if keyboard.is_pressed('enter'):
 				subprocess.run("/usr/share/ofono/scripts/answer-calls")
-			if keyboard.is_pressed('r'):
+			if keyboard.is_pressed('.'):
 				subprocess.run("/usr/share/ofono/scripts/reject-calls")
 			
 		if (state == "active"):
 			print("state active")
-			if keyboard.is_pressed('e'):
+			if keyboard.is_pressed('.'):
 				subprocess.run("/usr/share/ofono/scripts/hangup-active")
-			
-			
-			
-			
 			
 			
 			
