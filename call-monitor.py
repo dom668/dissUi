@@ -1,23 +1,29 @@
 import dbus
-import dbus.mainloop.glib 
+import dbus.mainloop.glib
 from gi.repository import GLib
+import subprocess
+
+AUDIO_FILE = "/home/dom/alert.wav"
 
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 bus = dbus.SystemBus()
 
-
 def call_added(path, properties):
-	print(f"Incoming call from: {properties.get('LineIdentification', 'Unknown')}")
-	print(f"Call state: {properties.get('State', 'Unknown')}")
-	
+    state = properties.get('State', '')
+    caller = properties.get('LineIdentification', 'Unknown')
+    
+    if state == 'incoming':
+        print(f"Incoming call from: {caller}")
+        subprocess.Popen(['pw-play', AUDIO_FILE])
+
 bus.add_signal_receiver(
-	call_added,
-	signal_name="CallAdded",
-	dbus_interface="org.ofono.VoiceCallManager",
-	bus_name="org.ofono"
+    call_added,
+    signal_name="CallAdded",
+    dbus_interface="org.ofono.VoiceCallManager",
+    bus_name="org.ofono"
 )
 
-print("monitoring for incoming calls..")
+print("Monitoring for incoming calls...")
 GLib.MainLoop().run()
 
 
